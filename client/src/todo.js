@@ -52,7 +52,7 @@ const Todo = () => {
     const updateStatus = async (id, currentStatus) => {
         try {
             const response = await axios.put(`http://localhost:4000/update/${id}`, {
-                completed: !currentStatus // Toggle the completed status
+                completed: !currentStatus 
             }, {
                 headers: {
                     'Authorization': localStorage.getItem("token"),
@@ -75,7 +75,7 @@ const Todo = () => {
                 }
             });
             console.log(response.data);
-            await fetchData(); // Refresh the data after deleting
+            await fetchData();
         } catch (error) {
             console.log(error.message);
         }
@@ -100,7 +100,7 @@ const Todo = () => {
         <div className="todo-container">
             <h2>To-Do List</h2>
             <div className="add-task">
-                <input name="email" placeholder="Enter task" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input name="task" placeholder="Enter task" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <button onClick={addTask}>Add Task</button>
                 <button onClick={logout}>Logout</button>
             </div>
@@ -125,10 +125,18 @@ const Todo = () => {
                             <td>{item.task}</td>
                             <td>{item.completed ? 'Yes' : 'No'}</td> 
                             <td>
-                                <button onClick={() => updateStatus(item._id, item.completed)}>
-                                    {item.completed ? 'Mark Incomplete' : 'Mark Complete'} 
+                                <button 
+                                    onClick={() => updateStatus(item._id, item.completed)}
+                                    className={item.completed ? 'incomplete' : 'completed'}
+                                >
+                                    {item.completed ? 'Mark Incomplete' : 'Mark Complete'}
                                 </button>
-                                <button onClick={() => deleteTask(item._id)}>Delete</button>
+                                <button 
+                                    onClick={() => deleteTask(item._id)} 
+                                    className="delete"
+                                >
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))}
