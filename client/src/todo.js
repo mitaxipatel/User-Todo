@@ -101,7 +101,7 @@ const Todo = () => {
             <h2>To-Do List</h2>
             <div className="add-task">
                 <input name="task" placeholder="Enter task" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <button onClick={addTask}>Add Task</button>
+                <button onClick={addTask} style={{marginRight: "2%"}}>Add Task</button>
                 <button onClick={logout}>Logout</button>
             </div>
             <div className="filter-buttons">
